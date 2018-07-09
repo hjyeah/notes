@@ -38,7 +38,8 @@ https://www.jianshu.com/p/c553169c5921
 * 二级缓存：默认不开启，`各个SqlSession对象`共享。默认二级缓存是不开启的，需要手动进行配置<cache ..... />(SQL 映射文件中)
 * 自定义缓存:实现org.mybatis.cache.Cache 接口，写法`<cache type="com.domain.something.MyCustomCache"/>`
 ### typehandle类型处理器
-https://www.cnblogs.com/dongying/p/4040435.html
+https://www.cnblogs.com/dongying/p/4040435.html  
+[typehandles推荐文章](http://blog.51cto.com/4443915/1828533)
 * 实现TypeHandler接口
 * 继承自BaseTypeHandler类(建议，不需要再去关心null的处理问题)
 ```
