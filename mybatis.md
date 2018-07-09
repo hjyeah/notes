@@ -37,3 +37,30 @@ https://www.jianshu.com/p/c553169c5921
 * 一级缓存：默认开启，在SqlSession 层面进行缓存，即，`同一个SqlSession` ，多次调用同一个Mapper和同一个方法的同一个参数，只会进行一次数据库查询，然后把数据缓存到缓冲中，以后直接先从缓存中取出数据，不会直接去查数据库
 * 二级缓存：默认不开启，`各个SqlSession对象`共享。默认二级缓存是不开启的，需要手动进行配置<cache ..... />(SQL 映射文件中)
 * 自定义缓存:实现org.mybatis.cache.Cache 接口，写法`<cache type="com.domain.something.MyCustomCache"/>`
+### typehandle类型处理器
+https://www.cnblogs.com/dongying/p/4040435.html
+* 实现TypeHandler接口
+* 继承自BaseTypeHandler类(建议，不需要再去关心null的处理问题)
+```
+@MappedJdbcTypes({JdbcType.VARCHAR})
+@MappedTypes({Date.class})
+public class MyDateTypeHandler extends BaseTypeHandler<Date> {
+    //设置参数的方法，若需要，具体在insert和update时候设置类型转换器，其中由于编码关系，在blob等字段插入更新中不需要设置此转换，防止多次编码操作导致乱码
+    public void setNonNullParameter(PreparedStatement preparedStatement, int i, Date date, JdbcType jdbcType) throws SQLException {
+        preparedStatement.setString(i, String.valueOf(date.getTime()));
+    }
+
+    public Date getNullableResult(ResultSet resultSet, String s) throws SQLException {
+        return new Date(resultSet.getLong(s));
+    }
+
+    public Date getNullableResult(ResultSet resultSet, int i) throws SQLException {
+        return new Date(resultSet.getLong(i));
+    }
+
+    public Date getNullableResult(CallableStatement callableStatement, int i) throws SQLException {
+        return callableStatement.getDate(i);
+    }
+}
+```
+@MappedJdbcTypes指定JdbcType类型，@MappedTypes指定JavaType的数据类型，实际也可根据泛型类型推算出  
