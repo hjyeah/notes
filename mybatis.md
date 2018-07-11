@@ -43,6 +43,7 @@ https://www.cnblogs.com/dongying/p/4040435.html
 [typehandles推荐文章](http://blog.51cto.com/4443915/1828533)
 * 实现TypeHandler接口
 * 继承自BaseTypeHandler类(建议，不需要再去关心null的处理问题)
+![typehandle匹配逻辑](https://github.com/hjyeah/notes/blob/master/typehandle.png)
 ```
 @MappedJdbcTypes({JdbcType.VARCHAR})
 @MappedTypes({Date.class})
