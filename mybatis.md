@@ -33,7 +33,8 @@ sql数据返回的执行过程
 resultType的本质也就是resultMap，类似property和column同命名方式
 >      mybatis3.4.0开始加入了@Mapper注解,作用添加了@Mapper注解之后这个接口在编译时会生成相应的实现类
 ### mybatis缓存
-https://www.jianshu.com/p/c553169c5921
+https://www.jianshu.com/p/c553169c5921  
+https://www.cnblogs.com/realshijing/p/8082598.html
 * 一级缓存：默认开启，在SqlSession 层面进行缓存，即，`同一个SqlSession` ，多次调用同一个Mapper和同一个方法的同一个参数，只会进行一次数据库查询，然后把数据缓存到缓冲中，以后直接先从缓存中取出数据，不会直接去查数据库
 * 二级缓存：默认不开启，`各个SqlSession对象`共享。默认二级缓存是不开启的，需要手动进行配置<cache ..... />(SQL 映射文件中)
 * 自定义缓存:实现org.mybatis.cache.Cache 接口，写法`<cache type="com.domain.something.MyCustomCache"/>`
